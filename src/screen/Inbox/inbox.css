@@ -1,0 +1,30 @@
+.container{
+    margin: 20px;
+}
+.sortBtn{
+
+}
+.profileIcon{
+    height: 25px;
+    width: 25px;
+    background-color: #E54065;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 10px
+}
+.mailDetails{
+    margin: 30px;
+    font-size: 10px;
+    font-weight: 500;
+}
+.cardView{
+    margin: 10px 0px;
+    display: flex;
+    border: 1.5px #cfd2dc solid;
+    border-radius: 5px;
+    background-color: #F4F5F9;
+ 
+}
