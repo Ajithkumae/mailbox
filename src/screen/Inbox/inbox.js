@@ -22,9 +22,8 @@ const InboxScreen = () => {
   const [showMail, setShowMail] = useState(false);
   const [currentMail, setCurrentMail] = useState();
 
-  let { subject, date } = mailList?.list?.find(
-    (el) => el.id == currentMail?.id
-  );
+  let { subject, date } =
+    mailList?.list?.find((el) => el.id == currentMail?.id) || {};
   return (
     <div className="container">
       <div className="headerBtn">
@@ -71,7 +70,10 @@ const InboxScreen = () => {
               </div>
               <div>mark as fav</div>
             </div>
-            <div className="mailBodyContentView" dangerouslySetInnerHTML={{ __html: currentMail?.body }} />
+            <div
+              className="mailBodyContentView"
+              dangerouslySetInnerHTML={{ __html: currentMail?.body }}
+            />
           </div>
         )}
       </div>
