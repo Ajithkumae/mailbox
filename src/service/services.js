@@ -8,3 +8,10 @@ export const fetchData = async (url) => {
 export const timeStampConverter = (timeStamp) => {
   return new Date(timeStamp).toLocaleString().replace(",", "");
 };
+export const setToLocalStorage = ({ nameString, data }) => {
+  localStorage.setItem(nameString, JSON.stringify(data));
+};
+
+export const getLocalStorage = (nameString) => {
+  return JSON.parse(localStorage.getItem(nameString));
+};

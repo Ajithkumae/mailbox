@@ -55,11 +55,13 @@
 
 .mailBodyView {
   margin: 10px 40px;
+}
+.mailBodyContainer {
   border: 1.5px #cfd2dc solid;
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
-  width: 70%;
-  height: fit-content;
+  position: fixed;
+  margin-right: 30px;
 }
 .bodyProfileView {
   height: 55px;
@@ -79,4 +81,26 @@
   color: #706e6e;
   padding: 0px 70px 50px 90px;
   font-size: small;
+}
+
+.favBtn {
+  margin: 0px 10px;
+  font-weight: normal;
+  font-size: small;
+  padding: 2px 13px;
+  border-radius: 12px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  border: #cfd2dc 1px solid;
+}
+
+.selectedFavBtn {
+  margin: 0px 10px;
+  font-weight: normal;
+  font-size: small;
+  padding: 2px 13px;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #e54065;
+  color: white;
 }
