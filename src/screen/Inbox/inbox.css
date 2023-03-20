@@ -3,18 +3,31 @@
 }
 .containerView {
   display: flex;
+  margin-top: 60px;
 }
 .headerBtn {
   display: flex;
   align-items: center;
+  position: fixed;
+  top: 0px;
+  height: 60px;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+.emptyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 .headerBtn h3 {
   margin: 0px 10px;
   font-weight: normal;
   font-size: medium;
-  background-color: #cfd2dc;
+ 
   padding: 2px 13px;
   border-radius: 12px;
+  cursor: pointer;
 }
 
 .profileIcon {
@@ -31,7 +44,6 @@
 .mailDetails {
   margin: 2px;
   font-size: 9px;
-
   line-height: 10px;
   color: #636363;
 }
@@ -40,13 +52,17 @@
   font-weight: normal;
   font-size: 12px;
 }
+.marginAling {
+  margin-top: 70px;
+}
 .cardView {
   margin: 10px 0px;
   display: flex;
   border: 1.5px #cfd2dc solid;
   border-radius: 5px;
-  background-color: rgb(255, 255, 255);
+  background-color: #FFFFFF;
 }
+
 .formDetail span {
   color: #636363;
   margin: 0px 0px 0px 5px;

@@ -4,70 +4,117 @@ import { storageKeys } from "../../service/constant";
 import {
   fetchData,
   getLocalStorage,
-  setToLocalStorage,
+  onHandleLocalStorage,
   timeStampConverter,
 } from "../../service/services";
 import "./inbox.css";
 const InboxScreen = () => {
+  const [mailList, setMailList] = useState([]);
+  const [showMail, setShowMail] = useState(false);
+  const [currentMail, setCurrentMail] = useState();
+  const [favoriteList, setFavoriteList] = useState();
+  const [filterType, setFilterType] = useState("Unread");
   const fetchLocalStorageList = () => {
     const listItem = getLocalStorage(storageKeys.favoriteList);
     setFavoriteList(listItem);
-    console.log("listItem", listItem);
   };
-  const addTolocalStorage = ({ nameString, data }) => {
-    debugger;
-    let prvData = getLocalStorage(nameString);
-    let checkExis = prvData?.includes(data);
-    !checkExis && prvData?.length >= 0
-      ? prvData.push(data)
-      : (prvData = [data]);
 
-    !checkExis &&
-      setToLocalStorage(
-        {
-          nameString: nameString,
-          data: prvData,
-        },
-        setFavoriteList(prvData)
-      );
+  const onHandleFavList = ({ nameString, data }) => {
+    let favState = onHandleLocalStorage({ nameString: nameString, data: data });
+    setFavoriteList(favState);
   };
+
   const fetchMailData = async () => {
     const data = await fetchData(mockMailList);
-    setMailList(data);
+    data.list?.forEach((list) => {
+      list.status = "unRead";
+    });
+    setMailList(data.list);
   };
+
+  const markAsRead = ({ id, dataList }) => {
+    const newData = [...dataList];
+    newData[id].status = "read";
+    setMailList(newData);
+  };
+
   const fetchMailBody = async (id) => {
     let url = mailBodyContent + id;
     const data = await fetchData(url);
+
     setCurrentMail(data);
     data.body && setShowMail(true);
   };
+
+  // useEffect(() => {
+  //   handleFilter();
+  // }, [favoriteList]);
+
   useEffect(() => {
     fetchMailData();
     fetchLocalStorageList();
   }, []);
 
-  const [mailList, setMailList] = useState([]);
-  const [showMail, setShowMail] = useState(false);
-  const [currentMail, setCurrentMail] = useState();
-  const [favoriteList, setFavoriteList] = useState();
+  const handleFilter = (key) => {
+    // fetchMailData();
+    setFilterType(key);
+    switch (key) {
+      case "Favorites":
+        let favList = mailList?.filter((f) => favoriteList.includes(f.id));
+        setMailList(favList);
+        break;
+      case "Unread":
+        let unRead = mailList?.filter((f) => f.status == "unRead");
+        setMailList(unRead);
+        break;
+      case "Read":
+        let read = mailList?.filter((f) => f.status == "read");
+        setMailList(read);
+        break;
+      default:
+        break;
+    }
+  };
 
   let { subject, date, from } =
-    mailList?.list?.find((el) => el.id == currentMail?.id) || {};
+    mailList?.find((el) => el.id === currentMail?.id) || {};
+
   return (
     <div className="container">
       <div className="headerBtn">
-        Filter By :<h3>Unread </h3>
-        <h3>Read </h3>
-        <h3>Favorite </h3>
+        Filter By :
+        {["Unread", "Read", "Favorites"].map((item, index) => {
+          return (
+            <h3
+              key={index}
+              onClick={() => handleFilter(item)}
+              style={{
+                backgroundColor:
+                  item === filterType ? "#e1e4ea" : "transparent",
+              }}
+            >
+              {item}
+            </h3>
+          );
+        })}
       </div>
-      <div className={showMail ? `containerView` : "none"}>
+      <div className={showMail ? `containerView` : "marginAling"}>
+        {!mailList.length > 0 && <div className="emptyContainer">no mail</div>}
         <div>
-          {mailList?.list?.map((item, index) => {
+          {mailList?.map((item, index) => {
             return (
               <div
                 className="cardView"
+                style={{
+                  borderColor: currentMail?.id - 1 == index ? "red" : "#cfd2dc",
+                  backgroundColor:
+                    item.status === "read" ? "#F2F2F2" : "#FFFFFF",
+                }}
                 key={index}
-                onClick={() => fetchMailBody(item.id)}
+                onClick={() => {
+                  fetchMailBody(item.id);
+                  markAsRead({ id: index, dataList: mailList });
+                }}
               >
                 <div className="profileIcon">
                   {item.from.name.charAt(0).toUpperCase()}
@@ -109,7 +156,7 @@ const InboxScreen = () => {
                       : "selectedFavBtn"
                   }
                   onClick={() =>
-                    addTolocalStorage({
+                    onHandleFavList({
                       nameString: storageKeys.favoriteList,
                       data: currentMail?.id,
                     })
