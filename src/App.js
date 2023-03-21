@@ -1,4 +1,4 @@
-import InboxScreen from "./screen/Inbox/inbox";
+import InboxScreen from "./screen/Inbox";
 
 function App() {
   return (

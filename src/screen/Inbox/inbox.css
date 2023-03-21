@@ -3,63 +3,53 @@
 }
 .containerView {
   display: flex;
+  margin-top: 60px;
+  width: 32%;
 }
 .headerBtn {
   display: flex;
   align-items: center;
+  position: fixed;
+  top: 0px;
+  height: 60px;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+.emptyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  margin-top: 10px;
+  border: 1.5px #cfd2dc solid;
+  border-radius: 5px;
+  background-color: #ffffff;
+  width: 100%;
 }
 .headerBtn h3 {
   margin: 0px 10px;
   font-weight: normal;
   font-size: medium;
-  background-color: #cfd2dc;
   padding: 2px 13px;
   border-radius: 12px;
+  cursor: pointer;
 }
 
-.profileIcon {
-  height: 25px;
-  width: 25px;
-  background-color: #e54065;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  margin: 10px;
-}
-.mailDetails {
-  margin: 2px;
-  font-size: 9px;
-
-  line-height: 10px;
-  color: #636363;
-}
-.mailDetails h3 {
-  color: #706e6e;
-  font-weight: normal;
-  font-size: 12px;
-}
-.cardView {
-  margin: 10px 0px;
-  display: flex;
-  border: 1.5px #cfd2dc solid;
-  border-radius: 5px;
-  background-color: rgb(255, 255, 255);
-}
-.formDetail span {
-  color: #636363;
-  margin: 0px 0px 0px 5px;
-  font-weight: 700;
+.marginAling {
+  margin-top: 70px;
 }
 
 .mailBodyView {
   margin: 10px 40px;
+}
+.mailBodyContainer {
   border: 1.5px #cfd2dc solid;
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
-  width: 70%;
-  height: fit-content;
+  position: fixed;
+  margin-right: 30px;
+  width: 68%;
+  right: 3px;
 }
 .bodyProfileView {
   height: 55px;
@@ -79,4 +69,26 @@
   color: #706e6e;
   padding: 0px 70px 50px 90px;
   font-size: small;
+}
+
+.favBtn {
+  margin: 0px 10px;
+  font-weight: normal;
+  font-size: small;
+  padding: 2px 13px;
+  border-radius: 12px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  border: #cfd2dc 1px solid;
+}
+
+.selectedFavBtn {
+  margin: 0px 10px;
+  font-weight: normal;
+  font-size: small;
+  padding: 2px 13px;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #e54065;
+  color: white;
 }
