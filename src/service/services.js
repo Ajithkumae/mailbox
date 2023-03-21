@@ -36,3 +36,33 @@ export const onHandleLocalStorage = ({ nameString, data }) => {
     return prvData;
   }
 };
+
+export const onHandleReadStatusLocalStoreage = ({ nameString, data }) => {
+  let prvData = getLocalStorage(nameString);
+  let checkExis = prvData?.includes(data);
+
+  !checkExis && prvData?.length >= 0 ? prvData.push(data) : (prvData = [data]);
+  !checkExis &&
+    setToLocalStorage({
+      nameString: nameString,
+      data: prvData,
+    });
+};
+
+export const handleFilter = ({ key, data }) => {
+  switch (key) {
+    case "All":
+      return data;
+    case "Favorites":
+      let favList = data?.filter((f) => f.favList === "favorite");
+      return favList;
+    case "Unread":
+      let unRead = data?.filter((f) => f.status === "unRead");
+      return unRead;
+    case "Read":
+      let read = data?.filter((f) => f.status === "read");
+      return read;
+    default:
+      break;
+  }
+};
